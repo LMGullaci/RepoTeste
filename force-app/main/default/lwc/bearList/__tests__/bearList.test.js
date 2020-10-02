@@ -2,6 +2,8 @@ import {createElement} from 'lwc';
 import BearList from 'c/bearList';
 import BearStore from 'c/bearStore';
 
+//New feature
+
 // jest.mock('c/bearStore', () => ({
 //     registerStateUpdate: jest.fn(),
 //     unregisterStateUpdate: jest.fn(),
