@@ -1,0 +1,46 @@
+{
+    "compilerOptions": {
+        "experimentalDecorators": true,
+        "baseUrl": ".",
+        "paths": {
+            "c/accountList": [
+                "accountList/accountList.js"
+            ],
+            "c/accountListItem": [
+                "accountListItem/accountListItem.js"
+            ],
+            "c/bearList": [
+                "bearList/bearList.js"
+            ],
+            "c/bearMap": [
+                "bearMap/bearMap.js"
+            ],
+            "c/bearSearchAction": [
+                "bearSearchAction/bearSearchAction.js"
+            ],
+            "c/bearStore": [
+                "bearStore/bearStore.js"
+            ],
+            "c/bearTile": [
+                "bearTile/bearTile.js"
+            ],
+            "c/dataBinding": [
+                "dataBinding/dataBinding.js"
+            ]
+        }
+    },
+    "include": [
+        "**/*",
+        "../../../../.sfdx/typings/lwc/**/*.d.ts"
+    ],
+    "typeAcquisition": {
+        "include": [
+            "jest"
+        ]
+    },
+    "paths": {
+        "c/*": [
+            "*"
+        ]
+    }
+}

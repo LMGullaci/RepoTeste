@@ -1,0 +1,18 @@
+<aura:component >
+
+    <aura:attribute name="config" type="Object"/>
+    <aura:attribute access="private" name="dataList" type="Object" />
+    <aura:attribute access="private" name="columnList" type="List" />
+
+    <aura:handler name="init" value="this" action="{!c.doInit}"/>
+
+    <table class="slds-m-top--medium slds-table slds-table--bordered slds-table__cell-buffer">
+        <c:TableHeader columns="{!v.columnList}"></c:TableHeader>
+        <tbody>
+            <aura:iteration items="{!v.dataList}" var="row">
+                <c:TableItem rowData="{!row}"></c:TableItem>
+            </aura:iteration>
+        </tbody>
+    </table>
+
+</aura:component>

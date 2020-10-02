@@ -1,0 +1,6 @@
+<aura:component >
+    <c:helloHeading />
+    <p>
+        Hello Word
+    </p>   
+</aura:component>

@@ -1,0 +1,34 @@
+<aura:component >
+
+    <aura:attribute name="filterItems" type="Object[]" default='[
+        {
+            label:"All",
+            checked:true,
+            action: "FILTER_TODO_LIST",
+            data: "ALL"
+        },
+        {
+            label:"Active",
+            checked:false,
+            action: "FILTER_TODO_LIST",
+            data: "ACTIVE"
+        },
+        {
+            label:"Inactive",
+            checked:false,
+            action: "FILTER_TODO_LIST",
+            data: "INACTIVE"
+        }
+    ]'/>
+    
+
+    <lightning:layout horizontalAlign="end">
+        <aura:iteration items="{!v.filterItems}" var="filter">
+            <lightning:layoutItem size="1">
+                <lightning:input label="{!filter.label}" type="radio" name="filter" checked="{!filter.checked}"/>        
+            </lightning:layoutItem>
+        </aura:iteration>   
+    </lightning:layout>
+
+
+</aura:component>

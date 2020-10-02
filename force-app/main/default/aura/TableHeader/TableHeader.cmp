@@ -1,0 +1,12 @@
+<aura:component >
+    <aura:attribute name="columns" type="List" required="true"/>
+
+    <thead>
+        <tr class="slds-text-title_caps slds-theme--default">
+            <aura:iteration items="{!v.columns}" var="column">
+                <th>{!column}</th>
+            </aura:iteration>
+        </tr>
+    </thead>
+
+</aura:component>

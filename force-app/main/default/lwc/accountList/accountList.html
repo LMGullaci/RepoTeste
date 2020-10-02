@@ -1,0 +1,19 @@
+<template>
+    <p>Hello Word</p>
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <template for:each={listItems} for:item="item">
+                <tr key={item.Id}>
+                    <td>{item.Name}</td>
+                </tr>
+            </template>
+        </tbody>
+    </table>
+</template>

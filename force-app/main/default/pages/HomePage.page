@@ -1,0 +1,38 @@
+<apex:page showHeader="true" sidebar="true" doctype="html-5.0" applyHtmlTag="true">
+	<html>
+		<head>
+				<link rel="stylesheet" type="text/css" href="{!URLFOR($Resource.bootstrap,'css/bootstrap.min.css')}"/>
+				<link rel="stylesheet" type="text/css" href="{!URLFOR($Resource.HomePageStyle)}"/>
+		</head>
+		<body>
+				<div onClick="toggleMenu(this);" class="sidebar activeMenu">
+					<ul class="menuLinks">
+						<li>
+								Contas
+						</li>
+						<li>
+								Contas
+						</li>
+						<li>
+								Contas
+						</li>
+					</ul>
+				</div>
+				<c:ComponenteTeste />
+                <!-- Teste alteração -->
+		</body>
+		<script type="text/javascript">
+			function toggleMenu(menu){
+				if(menu.className.contains('activeMenu')){
+					menu.className = menu.className.replace('activeMenu','closeMenu');
+				}else{
+					menu.className = menu.className.replace('closeMenu' ,'activeMenu');
+				}
+			}
+
+		</script>
+		<!--  <script src="{!URLFOR($Resource.jQuery)}"></script>
+
+		 <script src="{!URLFOR($Resource.bootstrap,'js/bootstrap.min.js')}"></script>-->
+	</html>
+</apex:page>

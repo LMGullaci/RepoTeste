@@ -1,0 +1,46 @@
+<aura:component access="global">
+
+    <lightning:layout >
+        <lightning:layoutItem padding="around-large">
+            <p class="slds-text-heading--large">
+                <h1>
+                    Todo List
+                </h1>
+            </p>
+        </lightning:layoutItem>
+        <lightning:layoutItem ></lightning:layoutItem>
+        <lightning:layoutItem ></lightning:layoutItem>
+    </lightning:layout>
+
+    <c:todoFilter />
+
+    <lightning:layout >
+        <lightning:layoutItem padding="around-small" size='12'>
+            <table class="slds-table slds-table--bordered slds-table--cell-bufered">
+                <thead>
+                    <tr>
+                        <th class="slds-text-title--caps">
+                            <div class="slds-truncate">Name </div>
+                        </th>
+                        <th class="slds-text-title--caps">
+                            <div class="slds-truncate">Age</div>
+                        </th>
+                        <th class="slds-text-title--caps">
+                            <div class="slds-truncate">Active?</div>
+                        </th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    <tr>
+                        <td>Teste 1</td>
+                        <td>23</td>
+                        <td><input type="checkbox" name="teste"/> </td>
+                    </tr>
+                </tbody>
+                
+            </table>
+        </lightning:layoutItem>
+    </lightning:layout>
+    
+</aura:component>

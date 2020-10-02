@@ -1,0 +1,12 @@
+<aura:component >
+    <aura:attribute name="rowData" type="List" default="[]" required="true"/>
+
+    
+    <tr>
+        <aura:iteration items="{!v.rowData}" var="data">
+            <td>{!data}</td>
+        </aura:iteration>
+    </tr>
+    
+
+</aura:component>

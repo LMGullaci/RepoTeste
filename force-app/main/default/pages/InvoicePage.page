@@ -1,0 +1,105 @@
+<apex:page docType="html-5.0" standardStylesheets="false" applyBodyTag="false" applyHtmlTag="false" showHeader="false" sidebar="false">
+    <html ng-app="StreamAPIPOC">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Document</title>
+    </head>
+        <body ng-controller="InvoiceList">
+            <p><h1>Invoice List</h1></p>
+            <p><button ng-click="subscribeChannel()">Subscribe channel Invoice</button></p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="invoice in invoices">
+                        <td>{{invoice.Name}}</td>
+                        <td>{{invoice.Status__c}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </body>
+        <script src="{!URLFOR($Resource.POC,'resources/angular.min.js')}"></script>
+        <script src="{!URLFOR($Resource.POC,'resources/cometd/cometd.js')}"></script>
+        <script src="{!URLFOR($Resource.POC,'resources/angular-cometd.js')}"></script>
+         <script>
+            var app = angular.module('StreamAPIPOC',['cometd']);
+            app.value('sfToken', '{!$Api.Session_ID}');
+
+            app.controller('InvoiceList', ['$scope', 'cometd','sfToken', ( $scope, cometd,sfToken) => {
+                let invoiceSubscription = undefined;
+                _init = () => {
+                    $scope.invoices = [];
+
+                    var cometdConfig = {
+                        url:window.location.protocol+'//'+window.location.hostname+ (null != window.location.port ? (':'+window.location.port) : '') +'/cometd/45.0/',
+                        requestHeaders:{Authorization:sfToken}
+                    }
+
+                    cometd.websocketEnabled = false;
+                    cometd.init(cometdConfig, response => {
+                        
+                        let status = response.successful;
+                        
+                        console.log('Cometd initialized: ' + status);
+
+                    });
+
+                }
+
+                _subscritionHandler = (messageChannel) =>{
+                    
+                    if(messageChannel.successful){
+                        console.log(`Channel ${messageChannel.subscription} subscribed successfully`);
+                    }else{
+                        console.log(`Sorry, wans't able connect to ${messageChannel.subscription} channel, contact your administrator`);
+                    }
+                }
+
+                
+                $scope.subscribeChannel = () => {
+
+                    // invoiceSubscription = cometd.subscribe('/u/Invoice/Test', function(message){
+                    invoiceSubscription = cometd.subscribe('/topic/InvoiceStatus', $scope.updateInvoiceList,_subscritionHandler);
+
+                    console.log('Subscription');
+                    console.log(invoiceSubscription);
+
+                }
+
+                $scope.updateInvoiceList = (response) => {
+                    console.log(response);
+                    switch (response.data.event.type) {
+                        case 'updated':
+                            $scope.invoices = $scope.invoices.map(invoice => invoice.Id === response.data.sobject.Id ? response.data.sobject : invoice);
+
+                            break;
+                        case 'deleted':
+                            $scope.invoices = $scope.invoices.filter(invoice => invoice.Id !== response.data.sobject.Id);
+                            
+                            break;
+                        case 'created':
+                            $scope.invoices.push(response.data.sobject);
+
+                            break;
+                        default:
+                            break;
+                    }
+
+                }
+
+
+             
+                _init();
+
+            }]);
+        </script>
+    </html>
+</apex:page>
