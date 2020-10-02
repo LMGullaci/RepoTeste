@@ -4,6 +4,7 @@ import BearStore from 'c/bearStore';
 
 //New feature
 // Commit on feature branch
+// Commit on github
 
 // jest.mock('c/bearStore', () => ({
 //     registerStateUpdate: jest.fn(),
